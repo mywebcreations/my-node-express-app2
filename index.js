@@ -32,9 +32,14 @@ app.get(/z/, (request, response)=>{
 })
 
 //URL request parameters
-app.get('/users/:id/:name/:age/:city', (request, response)=>{
+app.get('/users/:id/:name/:age/:city', (request, response, next)=>{
     response.send(request.params);
     console.log(request.params);
+    next()}, //instructs node to run the next arg - a callback function. 
+            // You can also add another next() to the arguments in the second callback function.
+    (request, response)=>{//(request, response, next())
+        console.log(`second callback within \'get\' route ${request.params.city}`)
+
 })
 
 app.listen(port, ()=>{
