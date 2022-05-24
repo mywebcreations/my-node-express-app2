@@ -6,6 +6,7 @@ const port = process.env.PORT || 8081; //if first is available, it will use it e
 
 //adding a static middleware.
 // app.use(express.static(__dirname+'/public')); 
+console.clear();
 
 app.get('/', (request, response)=>{
     response.send('<h1>Hello Test</h1>')
@@ -28,6 +29,12 @@ app.get('/pq*rs', (req, res)=>{//match any string of any length between q and r.
 //regular expressions
 app.get(/z/, (request, response)=>{
     response.send('<h2>URL file must have a \'z\' in it.');
+})
+
+//URL request parameters
+app.get('/users/:id/:name/:age/:city', (request, response)=>{
+    response.send(request.params);
+    console.log(request.params);
 })
 
 app.listen(port, ()=>{
